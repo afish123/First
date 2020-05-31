@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--适配器-->
+    <meta charset="UTF-8" name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <title>张心焱</title>
+    <link rel="short icon"  href="Resource/icon.png">
+    <!--加载外部样式表-->
+    <link rel="stylesheet" href="ExternalStyle.css">
+    <script type="text/javascript" src="CommonMethod.js"></script>
+    <style>
+        .L_second_div{
+            text-align: center;
+        }
+        .L_second_div{
+            margin-top: 50px;
+        }
+        .L_form_div{
+            background: white;
+            width: 90%;
+            margin: 0 auto;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            height: 100px;
+            margin-top: 30px;
+        }
+        .L_form_div div span{
+            font-size: 20px;
+            padding-left: 15px;
+            line-height:50px;
+        }
+        .L_account_div{
+            height: 50px;
+            border-bottom: 1px solid #cccccc;
+        }
+        input{
+            outline:medium ;
+            background:transparent ;
+            border: 0;
+        }
+        .L_login_btn_div{
+            height: 50px;
+            background: rgb(36,92,161);
+            width: 90%;
+            text-align: center;
+            border-radius: 10px;
+            margin: 20px auto;
+        }
+        .L_login_btn_div input{
+            line-height: 50px;
+            font-size: 20px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<!--第一部分-->
+<!--语义化标签：增强代码可读性-->
+<header class="DS_header">
+    <span>登录</span>
+</header>
+<!--第二部分-->
+<div class="L_second_div">
+    <img class="L_head_img" src="Resource/head.png" alt="">
+</div>
+<!--第三部分-->
+<form action="">
+    <div class="L_form_div">
+        <div class="L_account_div">
+            <span>账号名：</span>
+            <input id="L_account" type="text" name="account"><br>
+        </div>
+        <div>
+            <span>密码：</span>
+            <input id="L_pwd" type="password" name="password"><br>
+        </div>
+    </div>
+    <div class="L_login_btn_div">
+    <input type="button" value="登录" id="L_btn">
+    </div>
+</form>
+<script>
+    var btn =document.querySelector("#L_btn");
+    btn.onclick = function () {
+        var userName =encodeURIComponent(document.querySelector("#L_account").value);
+        var pwd = encodeURIComponent(document.querySelector("#L_pwd").value);
+        //第一步；创建请求对象（负责去服务端要数据）
+        // var xhr = new XMLHttpRequest();
+        //第二部；建立与服务端的连接（找到哪个服务器去要数据）
+        // xhr.open('post','https://mockapi.eolinker.com/2ZhGVxjacb39010e6753bd9c02ee803e6e3bfeab6e8007c/login');
+        // //设置头信息，告诉服务器让数据以表单的形式传递过去
+        // xhr.setRequestHeader("content-type","application/x-www-form-urlencoded");
+        var par = "username="+userName+"&pwd="+pwd;
+        //第三步；向服务端发送请求
+        // xhr.send(par);
+        //第四步；接受服务端返回的数据
+        // xhr.onreadystatechange = function (){
+            //readyState == 4 代表数据请求完成  xhr.status == 200代表数据返回成功
+            // if(xhr.readyState == 4 && xhr.status == 200){
+            //     var responseDate = JSON.parse(xhr.responseText);
+            //     var str = responseDate.data;
+        requestMethod('post','login',par,function (returnStr) {
+
+            if(returnStr == "登录成功"){
+                location.href = "DropletService.html";
+            }else{
+                alert(returnStr);
+            }
+        });
+
+        //     }
+        // }
+        // var userName = document.querySelector("#L_account").value;
+        // var pwd = document.querySelector("#L_pwd").value;
+        // if (userName == "zxy" && pwd == "123456") {
+        //     location.href = "DropletService.html";
+        // } else {
+        //     alert("密码或者用户名不正确");
+        // }
+    }
+
+</script>
+</body>
+</html>
